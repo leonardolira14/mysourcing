@@ -28,21 +28,36 @@ export class TableComponent implements OnInit {
 
   }
 
+  /**
+   * Open
+   * @param content
+   * @param person
+   */
   open(content:any,person:personentity) {
     this.tempperson= person;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 
+  /**
+   * Input Document
+   */
   inputdoc(){
     let archivos = this.filedoc.nativeElement.files[0];
     this.tempperson['document'] = archivos.name
   }
 
+  /**
+   * Save persons
+   */
   savepersons(){
     localStorage.setItem('persons', JSON.stringify(this.listperson));
     this.modalService.dismissAll();
     alert('Datos salvados');
   }
+  /**
+   * Clear document
+   * @param person
+   */
   clear(person:personentity){
     person.document = '';
     localStorage.setItem('persons', JSON.stringify(this.listperson));

@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { TableComponent } from './table.component';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 
+/**
+ * Table Module
+ */
 @NgModule({
   declarations: [
     TableComponent
