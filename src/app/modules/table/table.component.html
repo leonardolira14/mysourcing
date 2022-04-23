@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1>Personas</h1>
+    </div>
+    <div class="col-12 mt-4">
+      <table class="table table-striped">
+        <thead>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>sexo</th>
+          <th>Documento</th>
+          <th>Acciones</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let person of listperson"  >
+            <td>{{person.name}}</td>
+            <td>{{person.age}}</td>
+            <td>{{person.gender}}</td>
+            <td>{{person.document}}</td>
+            <td *ngIf="person.document ===''">
+              <div class="btn-group me-2" role="group" aria-label="First group">
+                <button title="Subir Archivo"  (click)="open(content, person)"  class="btn btn-primary">
+                  <span class="material-symbols-outlined">
+                    file_upload
+                    </span>
+                </button>
+
+              </div>
+
+            </td>
+            <td *ngIf="person.document !==''">
+              <div class="btn-group me-2" role="group" aria-label="First group">
+                <button  title="Modificar Archivo" (click)="open(content, person)"  class="btn btn-primary">
+                  <span class="material-symbols-outlined">
+                    autorenew
+                    </span>
+                </button>
+                <button type="button" (click)="clear(person)" title="Eliminar archivo" class="btn btn-primary">
+                  <span class="material-symbols-outlined">
+                    delete_forever
+                    </span>
+                </button>
+              </div>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Subir Archivo</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+      <div class="mb-3">
+        <label for="dateOfBirth">Nombre:</label>
+        <div class="mb-3">
+          <input type="text" [(ngModel)]="tempperson.name" class="form-control"  placeholder="">
+        </div>
+        <div class="mb-3">
+          <input type="text" disabled [(ngModel)]="tempperson.document" class="form-control"  placeholder="">
+        </div>
+      </div>
+
+  </div>
+  <div class="modal-footer">
+
+    <button type="button" class="btn btn-outline-dark" (click)="filedoc.click()">Subir Archivo</button>
+    <button type="button" class="btn btn-outline-dark" (click)="savepersons()">Guardar </button>
+  </div>
+</ng-template>
+<input type="file" (change)="inputdoc()" class="d-none" #filedoc>
